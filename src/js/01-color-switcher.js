@@ -1,13 +1,15 @@
 // Data
 
+const ATTRIBUTE_DISABLED = "disabled";
+const start = "data-start";
+const stop = "data-stop";
+
 refs = {
     body: document.querySelector("body"),
     buttonStart: document.querySelector("button[data-start]"),
     buttonStop: document.querySelector("button[data-stop]"),
     divButtons: document.querySelector("#buttons")
 };
-
-let timerId = null;
 
 // Functions
 
@@ -27,16 +29,11 @@ function onButtonStop() {
 }
 
 function disableButton(event) {
-    const start = "data-start";
-    const stop = "data-stop";
-    const ATTRIBUTE_DISABLED = "disabled";
-
     if (event.target.hasAttribute(start)) {
         refs.buttonStart.setAttribute(ATTRIBUTE_DISABLED, "");
         refs.buttonStop.removeAttribute(ATTRIBUTE_DISABLED);
 
     }
-
     if (event.target.hasAttribute(stop)) {
         refs.buttonStop.setAttribute(ATTRIBUTE_DISABLED, "");
         refs.buttonStart.removeAttribute(ATTRIBUTE_DISABLED);
@@ -44,10 +41,6 @@ function disableButton(event) {
 }
 
 function onButton(event) {
-
-    const start = "data-start";
-    const stop = "data-stop";
-
     console.log("Click on " + event.target.textContent);
 
     if (event.target.hasAttribute(start)) {
@@ -62,6 +55,8 @@ function onButton(event) {
 
 //Main
 
-refs.buttonStop.setAttribute("disabled", "");
+let timerId = null;
+
+refs.buttonStop.setAttribute(ATTRIBUTE_DISABLED, "");
 
 refs.divButtons.addEventListener("click", onButton);
